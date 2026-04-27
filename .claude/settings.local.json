@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash",
+      "WebSearch",
+      "WebFetch",
+      "mcp__playwright",
+      "Skill(git:commit)",
+      "Bash(rm -rf .git)",
+      "Bash(git init *)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "playwright"
+  ],
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/Users/jjw12/.claude/hooks/slack-notification.sh",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /c/Users/jjw12/.claude/hooks/slack-stop.sh",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
