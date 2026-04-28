@@ -1,68 +1,39 @@
-// 스타터킷 전체 쇼케이스 페이지
+// 홈 페이지 - 견적서 토큰 입력 안내 페이지
+// 직접 접속 시 견적서 조회 방법을 안내
 import { PageLayout } from "@/components/layout/PageLayout";
-import { ShowcaseHero } from "@/components/sections/ShowcaseHero";
-import { ShowcaseButtons } from "@/components/sections/ShowcaseButtons";
-import { ShowcaseForms } from "@/components/sections/ShowcaseForms";
-import { ShowcaseCards } from "@/components/sections/ShowcaseCards";
-import { ShowcaseOverlays } from "@/components/sections/ShowcaseOverlays";
-import { ShowcaseFeedback } from "@/components/sections/ShowcaseFeedback";
+import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants";
+import { FileText } from "lucide-react";
 
-// 모든 컴포넌트를 쇼케이스하는 데모 페이지
-export default function Home() {
+export default function HomePage() {
   return (
     <PageLayout>
-      {/* 전체 쇼케이스 섹션 */}
-      <div className="space-y-24 py-8">
-        {/* 1. 히어로 섹션 */}
-        <ShowcaseHero />
+      {/* 메인 콘텐츠: 서비스 안내 */}
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-6">
+        {/* 서비스 아이콘 */}
+        <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+          <FileText className="h-10 w-10 text-primary" />
+        </div>
 
-        {/* 2. 버튼 쇼케이스 */}
-        <ShowcaseButtons />
+        {/* 서비스 제목 및 설명 */}
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            {SITE_NAME}
+          </h1>
+          <p className="max-w-md text-muted-foreground">
+            {SITE_DESCRIPTION}
+          </p>
+        </div>
 
-        {/* 3. 폼 쇼케이스 (React Hook Form + Zod) */}
-        <ShowcaseForms />
-
-        {/* 4. 카드/배지/아바타 */}
-        <ShowcaseCards />
-
-        {/* 5. 오버레이 컴포넌트 */}
-        <ShowcaseOverlays />
-
-        {/* 6. 피드백 컴포넌트 */}
-        <ShowcaseFeedback />
-
-        {/* 7. 스타터킷 정보 */}
-        <section className="space-y-4 py-8 border-t">
-          <h2 className="text-3xl font-bold">스타터킷 정보</h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 text-sm">
-            <div>
-              <h3 className="font-semibold mb-2">📦 기술 스택</h3>
-              <ul className="space-y-1 text-muted-foreground">
-                <li>• Next.js 16 + React 19</li>
-                <li>• TypeScript 5</li>
-                <li>• Tailwind CSS v4</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">🎨 UI 라이브러리</h3>
-              <ul className="space-y-1 text-muted-foreground">
-                <li>• shadcn/ui (40+ 컴포넌트)</li>
-                <li>• Radix UI</li>
-                <li>• lucide-react</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">🛠️ 유틸리티</h3>
-              <ul className="space-y-1 text-muted-foreground">
-                <li>• React Hook Form</li>
-                <li>• Zod (유효성 검사)</li>
-                <li>• usehooks-ts</li>
-                <li>• Sonner (토스트)</li>
-                <li>• next-themes</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+        {/* 사용 방법 안내 */}
+        <div className="rounded-lg border bg-muted/50 px-6 py-4 max-w-md w-full text-left">
+          <p className="text-sm font-medium mb-2">견적서 조회 방법</p>
+          <p className="text-sm text-muted-foreground">
+            담당자로부터 받은 견적서 URL로 접속하면 견적서를 조회할 수 있습니다.
+          </p>
+          <code className="mt-2 block text-xs text-muted-foreground">
+            예: /quote/&#123;토큰&#125;
+          </code>
+        </div>
       </div>
     </PageLayout>
   );

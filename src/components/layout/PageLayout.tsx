@@ -1,14 +1,15 @@
-// 페이지 레이아웃 (Header + main + Footer 조합)
+// 페이지 레이아웃 - Header + main + Footer 조합
+// Server Component: 정적 레이아웃 구조
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
-// Server Component: 정적 레이아웃
 interface PageLayoutProps {
   children: React.ReactNode;
+  // 페이지 본문 영역에 추가적인 클래스를 전달할 수 있음
   className?: string;
 }
 
-// 전체 페이지 구조: sticky header + flex-1 main + footer
+// 전체 페이지 구조: sticky header → flex-grow main → footer
 export function PageLayout({ children, className = "" }: PageLayoutProps) {
   return (
     <>
