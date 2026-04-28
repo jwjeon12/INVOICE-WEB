@@ -4,13 +4,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Next.js 15 + React 19 모던 웹 스타터킷 프로젝트입니다. Tailwind CSS v4와 shadcn/ui를 기반으로 하는 프로덕션-레디 스타터 템플릿입니다.
+Notion 기반 견적서 웹 조회 & PDF 다운로드 시스템입니다.
+Notion 데이터베이스에서 견적서 데이터를 실시간으로 조회하고, 공개 URL(토큰 기반)로 고객이 견적서를 확인하고 PDF로 다운로드할 수 있습니다.
+
+## Project Context
+
+- **PRD 문서**: @docs/PRD.md
+- **개발 로드맵**: @docs/ROADMAP.md
 
 **Tech Stack:**
 - Framework: Next.js 16.2.4 (App Router)
 - UI Library: React 19.2.4
 - CSS: Tailwind CSS v4 (@tailwindcss/postcss)
 - UI Components: shadcn/ui (Radix UI + Tailwind)
+- Data Source: Notion API (@notionhq/client)
+- PDF Generation: @react-pdf/renderer
 - Form Handling: React Hook Form + Zod
 - Icons: Lucide React
 - Theme: next-themes (Light/Dark mode)
@@ -21,24 +29,27 @@ Next.js 15 + React 19 모던 웹 스타터킷 프로젝트입니다. Tailwind CS
 
 ```
 src/
-├── app/                    # Next.js 앱 라우터 (페이지 + 레이아웃)
-│   ├── layout.tsx          # 루트 레이아웃 (ThemeProvider, Toaster 포함)
-│   ├── page.tsx            # 홈 페이지
-│   ├── globals.css         # 전역 스타일 + Tailwind 지시문
-│   └── [route]/            # 동적 라우트
-├── components/             # 재사용 가능한 React 컴포넌트
-│   ├── ui/                 # shadcn/ui 컴포넌트 라이브러리
-│   ├── layout/             # 페이지 레이아웃 컴포넌트 (Header, Footer, Sidebar)
-│   ├── sections/           # 홈페이지 섹션 (ShowcaseHero, ShowcaseCards 등)
-│   └── theme/              # 테마 제공자 및 토글 (ThemeProvider, ThemeToggle)
-├── hooks/                  # 커스텀 React 훅
-│   ├── useMediaQuery.ts    # 반응형 디자인용 미디어 쿼리 훅
-│   ├── useLocalStorage.ts  # 로컬스토리지 상태 관리 훅
-│   └── index.ts            # 훅 export 중앙 관리
+├── app/                        # Next.js 앱 라우터
+│   ├── layout.tsx              # 루트 레이아웃 (ThemeProvider, Toaster 포함)
+│   ├── page.tsx                # 홈 페이지 (견적서 조회 안내)
+│   ├── not-found.tsx           # 404 페이지
+│   ├── globals.css             # 전역 스타일 + Tailwind 지시문
+│   └── quote/[token]/          # 견적서 조회 동적 라우트
+│       └── page.tsx
+├── components/                 # 재사용 가능한 React 컴포넌트
+│   ├── ui/                     # shadcn/ui 컴포넌트 (button, card, badge 등)
+│   ├── layout/                 # 페이지 레이아웃 (Header, Footer, PageLayout)
+│   ├── quote/                  # 견적서 관련 컴포넌트
+│   │   ├── QuoteView.tsx       # 견적서 데이터 표시 (서버 컴포넌트)
+│   │   ├── QuoteDownloadButton.tsx  # PDF 다운로드 버튼 (클라이언트)
+│   │   └── QuotePdfDocument.tsx     # PDF 문서 렌더링
+│   └── theme/                  # 테마 제공자 및 토글
 ├── lib/
-│   ├── utils.ts            # 유틸리티 함수 (cn() - Tailwind merge)
-│   ├── constants.ts        # 전역 상수 (NAV_LINKS, BREAKPOINTS 등)
-│   └── validations.ts      # Zod 스키마 정의
+│   ├── utils.ts                # 유틸리티 함수 (cn() - Tailwind merge)
+│   ├── constants.ts            # 전역 상수 (SITE_NAME, QUOTE_STATUS 등)
+│   ├── validations.ts          # Zod 스키마 (Quote, QuoteItem 등)
+│   ├── notion.ts               # Notion 클라이언트 초기화
+│   └── quote.ts                # 견적서 데이터 조회 함수
 └── (config files)
 ```
 
